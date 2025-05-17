@@ -1,6 +1,7 @@
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework import viewsets
+from .models import Listing
+from .serializers import ListingSerializer
 
-@api_view(['GET'])
-def home(request):
-    return Response({"message": "Bienvenue sur l'API alxtravelapp"})
+class ListingViewSet(viewsets.ModelViewSet):
+    queryset = Listing.objects.all().order_by('-created_at')
+    serializer_class = ListingSerializer
